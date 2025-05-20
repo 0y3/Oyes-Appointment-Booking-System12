@@ -19,13 +19,13 @@ Route::get('admin', function () {
     return Inertia::render('Dashboard', [
         'bookings' => Booking::all() // Pass bookings data
     ]);
-})->middleware(['auth', 'verified', EnsureAdminHasGoogleCalendar::class])->name('admin');
+})->middleware(['auth', 'verified', EnsureAdminHasGoogleCalendar::class])->name('dashboard');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard_old', [
-        'bookings' => Booking::all() // Pass bookings data
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('dashboard', function () {
+//     return Inertia::render('Dashboard_old', [
+//         'bookings' => Booking::all() // Pass bookings data
+//     ]);
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
