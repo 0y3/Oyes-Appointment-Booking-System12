@@ -12,12 +12,12 @@ use App\Jobs\SyncExistingEvents;
 
 class GoogleController extends Controller
 {
-    protected $googleCalendar;
+    // protected $googleCalendar;
 
-    public function __construct(GoogleCalendarService $googleCalendar)
-    {
-        // $this->googleCalendar = $googleCalendar;
-    }
+    // public function __construct(GoogleCalendarService $googleCalendar)
+    // {
+    //     $this->googleCalendar = $googleCalendar;
+    // }
 
     /**
      * Redirect to Google OAuth
@@ -46,7 +46,6 @@ class GoogleController extends Controller
      */
     public function callback(Request $request)
     {
-        // try {
             $googleUser = Socialite::driver('google')->user();
             $user = User::where('email', $googleUser->email)->first();
             $account = GoogleAccount::updateOrCreate(
@@ -63,18 +62,6 @@ class GoogleController extends Controller
             );
             return to_route('admin')->with('success', 'Google account connected successfully!');
 
-
-            // return Inertia::render('Auth/ConnectCalendar', [
-            //     'calendars' => $calendars,
-            //     'default_timezone' => $this->googleCalendar->getPrimaryCalendarTimezone($account)
-            // ]);
-
-        // } catch (\Exception $e) {
-        //     logger()->error('Google OAuth Error: ' . $e->getMessage());
-        //     return redirect()->route('calendar.connect')->withErrors([
-        //         'message' => 'Failed to connect Google account. Please try again.'
-        //     ]);
-        // }
     }
 
 

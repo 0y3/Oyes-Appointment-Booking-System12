@@ -35,7 +35,7 @@ class BookingController extends Controller
             'description' => 'nullable|string',
             'start_time' => 'required|date',
             'end_time' => 'required|date',
-            'timezone' => 'required|string'
+            // 'timezone' => 'required|string'
         ]);
 
         $request->user()?$validated['user_id'] = $request->user()->id:$validated['user_id'] = 1;
@@ -43,7 +43,7 @@ class BookingController extends Controller
 
         $booking = $this->bookingService->createBooking($validated);
 
-        return response()->json($booking, 201);
+        return response()->json('Appointment created successfully', 201);
     }
 
     public function index()

@@ -171,6 +171,6 @@ class GoogleCalendarService
 
     public function getEvent($booking)
     {
-        // Create event in Google Calendar
+        
     }
 }
