@@ -28,7 +28,7 @@
   <img src="public/screenshort/ss1.png" alt="screenshot" />
   <img src="public/screenshort/ss2.png" alt="screenshot" />
   <img src="public/screenshort/login.png" alt="screenshot" />
-  <img src="public/screenshort/register.png" alt="screenshot" />
+  <img src="public/screenshort/reg.png" alt="screenshot" />
   <img src="public/screenshort/oauth.png" alt="screenshot" />
   <img src="public/screenshort/admin.png" alt="screenshot" />
 </div>
