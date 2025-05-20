@@ -32,23 +32,35 @@
   <img src="public/screenshort/oauth.png" alt="screenshot" />
   <img src="public/screenshort/admin.png" alt="screenshot" />
 </div>
+<hr>
 
-<hr><p>PHP (8.1 or higher)</p>
+### Install Prerequisites
+<p>PHP (8.2 or higher)</p>
 <p>Composer (Dependency Manager)</p>
-<p>Node.js (for frontend assets)</p>
+<p>Node.js & npm (for frontend assets)</p>
 <p>MySQL or another database system</p>
-<p>Git (for cloning the repository)</p><h5>Steps</h5><ul>
-<li>Git Clone project</li>
-</ul><ul>
-<li>cd project</li>
-</ul><ul>
-<li>composer i</li>
-</ul><ul>
-<li>npm i</li>
-</ul><ul>
-<li>composer run dev</li>
-</ul><ul>
-<li>copy .env.example and save it as .env</li>
+<p>Git (for cloning the repository)</p>
+
+
+### Check PHP & Composer
+
+```
+    php -v  
+    composer -v  
+    node -v  
+    npm -v  
+```
+
+<hr>
+
+### Steps
+<ul><li>Git Clone project</li></ul>
+<ul><li>cd project</li></ul>
+<ul><li>composer i</li></ul>
+<ul><li>npm i</li></ul>
+<ul><li>copy .env.example and save it as .env</li></ul>
+<ul><li>php artisan migrate</li></ul>
+<ul><li>composer run dev</li></ul>
 
 
 ### Environment Variables
