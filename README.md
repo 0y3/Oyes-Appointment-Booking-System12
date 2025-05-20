@@ -56,39 +56,45 @@
 To run this project, you will need to add the following environment variables to your .env file
 
 ```bash
+
+APP_URL=http://127.0.0.1:8000
+
 #--------------------------------------------------------------------
 # DATABASE
 #--------------------------------------------------------------------
+ DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=laravel
+# DB_USERNAME=root
+# DB_PASSWORD=
+ 
+# Looking to send emails in production? Check out our Email API/SMTP product!  
+#YOUR Mailtrap Keys for testing email 
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=3965efc7a8125f
+MAIL_PASSWORD=12179c46e23f33
+MAIL_FROM_ADDRESS="info@trovolink.com"
+MAIL_FROM_NAME="${APP_NAME}"
 
- database.default.hostname = localhost
- database.default.database = dukkaprojectdb
- database.default.username = root
- database.default.password = ''
- database.default.DBDriver = MySQLi
- database.default.DSN = 'mysql:dbname=otfonline;host=localhost'
- 
- 
- app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
- app.sessionCookieName = 'ci_session'
- app.sessionExpiration = 7200
- app.sessionMatchIP = true
- app.sessionTimeToUpdate = 1
- app.sessionRegenerateDestroy = true
- 
- encryption.key = hex2bin:ac3b50af48230d45994c3fee0d3652a4acbc68a31c87f9c1add4219e447fdd62 
- encryption.driver = OpenSSL
- encryption.blockSize = 16
- encryption.digest = SHA512
+
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=127.0.0.1
  
  
 #--------------------------------------------------------------------
-# flutterwave Gateway
+# Google Api
 #--------------------------------------------------------------------
-FLW_MODE = test
-#YOUR Flutterwave KEYS
+#YOUR Google Client  KEYS
 
-FLW_TEST_PUBLIC_KEY = FLWPUBK_TEST-43d25c352d75307ac1881121b2af4c23-X
-FLW_TEST_ENCRYP_KEY = FLWSECK_TEST62def68454e3
+GOOGLE_CLIENT_ID=xxxx...xxxx...xxxx...xxx..xxxx
+GOOGLE_CLIENT_SECRET=xxxx...xxxx...xxxx...xxx..xxxx
+GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback
  
 ```
 
