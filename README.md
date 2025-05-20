@@ -33,7 +33,6 @@
   <img src="public/screenshort/admin.png" alt="screenshot" />
 </div>
 
-<hr><p><img src="https://github.com/0y3/Oyes-Appointment-Booking-System12/blob/master/public/screenshort/admin.png" alt=""></p><h2>Setup</h2>
 <hr><p>PHP (8.1 or higher)</p>
 <p>Composer (Dependency Manager)</p>
 <p>Node.js (for frontend assets)</p>
