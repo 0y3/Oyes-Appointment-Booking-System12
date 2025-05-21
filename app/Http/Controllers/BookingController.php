@@ -16,15 +16,13 @@ class BookingController extends Controller
 
     public function getAvailableSlots(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'date' => 'required|date',
-            'timezone' => 'required|string'
+            // 'timezone' => 'required|string'
         ]);
 
-        return $this->bookingService->getAvailableSlots(
-            $request->date,
-            $request->timezone
-        );
+        // return $this->bookingService->getAvailableSlots($validated);
+        return $this->bookingService->getAvailableSlotsGoogle($validated);
     }
 
     public function store(Request $request)

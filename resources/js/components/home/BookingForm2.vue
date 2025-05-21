@@ -61,6 +61,8 @@ const fetchSlots = async () => {
         error.value = 'Could not fetch slots. Please try again.';
         availableSlots.value = [];
     } finally {
+        selectedSlot.value = null;
+        form.value.slot = null;
         loading.value = false;
     }
 };
@@ -155,10 +157,10 @@ const submitBooking = async () => {
     return
   }
   formError.value = ''
-  
+
   loading.value = true
   try {
-    const datetimeString = `${form.value.date} ${form.value.slot}`
+    const datetimeString = `${selectedDate.value} ${form.value.slot}`
     const start_time = moment(datetimeString, 'YYYY-MM-DD h:mm a').format('YYYY-MM-DD HH:mm:ss')
     const end_time = moment(start_time).add(1, 'hour').format('YYYY-MM-DD HH:mm:ss')
 

@@ -70,14 +70,22 @@ class GoogleCalendarService
         return new Calendar($this->client);
     }
 
-    public function getAvailableSlots($date, $timezone)
+    public function getAvailableSlots(GoogleAccount $account,$data)
     {
+        $dataFilter = [
+            'timeMin' => $data['date'],
+            'timezone' => $data['timezone']
+        ];
+
+        $googleEvent = $this->getEvents($account, $dataFilter);
+
+        $user_id = $data['user_id']??1;
+        $vendorAccount = GoogleAccount::where('user_id',$user_id)->whereNotNull('token')->first();
 
         // Convert date to vendor's timezone
-        $vendorAccount = GoogleAccount::first();
         $vendorTimezone = $vendorAccount->timezone ?? config('app.timezone', 'Africa/Lagos');
 
-        $startOfDay = Carbon::parse($date, $timezone)
+        $startOfDay = Carbon::parse($data['date'], $data['timezone'])
             ->setTimezone($vendorTimezone)
             ->startOfDay();
 
@@ -99,8 +107,7 @@ class GoogleCalendarService
                 $eventStart = Carbon::parse($event->start->dateTime);
                 $eventEnd = Carbon::parse($event->end->dateTime);
 
-                if ($current->between($eventStart, $eventEnd) ||
-                    $slotEnd->between($eventStart, $eventEnd)) {
+                if ($current->between($eventStart, $eventEnd) || $slotEnd->between($eventStart, $eventEnd)) {
                     $isAvailable = false;
                     break;
                 }
@@ -108,9 +115,9 @@ class GoogleCalendarService
 
             if ($isAvailable) {
                 $slots[] = [
-                    'start' => $current->copy()->setTimezone($timezone),
-                    'end' => $slotEnd->copy()->setTimezone($timezone),
-                    'formatted' => $current->setTimezone($timezone)->format('g:i A')
+                    'start' => $current->copy()->setTimezone($data['timezone']),
+                    'end' => $slotEnd->copy()->setTimezone($data['timezone']),
+                    'formatted' => $current->setTimezone($data['timezone'])->format('g:i A')
                 ];
             }
 
@@ -169,8 +176,26 @@ class GoogleCalendarService
         );
     }
 
-    public function getEvent($booking)
+
+    public function getEvents(GoogleAccount $account, $optionalFilters = []): array
     {
-        
+        $service = $this->getCalendarService($account);
+
+        $params = [
+            'timeZone' => $optionalFilters['timezone'] ?? config('app.timezone', 'Africa/Lagos'),
+            'timeMin' => $optionalFilters['timemin'] ?? now()->toIso8601String(),
+            // 'timeMax' => $optionalFilters['timemax'] ?? Carbon::now()->addDay()->toRfc3339String(),
+            'maxResults' => 250,
+            'singleEvents' => true,
+            'orderBy' => 'startTime'
+        ];
+
+
+        $events = $service->events->listEvents(
+            $account->calendar_id ?? 'primary',
+            $params
+        );
+
+        return $events->getItems();
     }
 }
