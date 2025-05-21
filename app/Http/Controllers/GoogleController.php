@@ -60,7 +60,7 @@ class GoogleController extends Controller
                     'is_active' => true
                 ]
             );
-            return to_route('admin')->with('success', 'Google account connected successfully!');
+            return to_route('dashboard')->with('success', 'Google account connected successfully!');
 
     }
 
